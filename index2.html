@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Age Calculator – My Wife’s Age</title>
+  <meta name="description" content="See exactly how old my wife is in years, months, days, hours, and minutes.">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      white-space: pre-line;
+    }
+  </style>
+</head>
+<body>
+  <h1>My Wife's Age</h1>
+  <div class="result" id="result"></div>
+
+  <script>
+    function showWifeAge() {
+      // ✅ Fixed birth date: Sept 28, 1970
+      const birthDate = new Date("1970-09-28T00:00:00");
+      const today = new Date();
+
+      const ageInMs = today - birthDate;
+      const ageDate = new Date(ageInMs);
+
+      const years = ageDate.getUTCFullYear() - 1970;
+      const months = (today.getFullYear() - birthDate.getFullYear()) * 12 +
+                     (today.getMonth() - birthDate.getMonth());
+      const days = Math.floor(ageInMs / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(ageInMs / (1000 * 60 * 60));
+      const minutes = Math.floor(ageInMs / (1000 * 60));
+
+      document.getElementById("result").innerText =
+        `She is ${years} years old\n
+         Or ${months} months\n
+         Or ${days} days\n
+         Or ${hours} hours\n
+         Or ${minutes} minutes old.`;
+    }
+
+    // Run automatically on page load
+    window.onload = showWifeAge;
+  </script>
+</body>
+</html>
